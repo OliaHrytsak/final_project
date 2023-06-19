@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>to-do-list</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="container header">
+      <div class="clock__container">
+        <p id="date"></p>
+        <div class="big__clock"></div>
+      </div>
+      <div class="container">
+        <p class="header__text">TO DO APP</p>
+      </div>
+    </header>
+
+    <main>
+      <div class="container main__container">
+        <p class="add__task">
+          <label for="new__task">ADD TASK</label
+          ><input class="new__task" type="text" />
+
+          <select class="task__options">
+            <option value="default" selected></option>
+            <option value="option1">Go shoping</option>
+            <option value="option2">Payy Bills</option>
+            <option value="option3">Training</option>
+            <option value="option4">Cleaning</option>
+            <option value="option4">Meeting</option>
+            <option value="option4">Work</option>
+            <option value="option4">Teaching</option>
+          </select>
+
+          <button class="new__task-btn">Add</button>
+        </p>
+
+        <h3 class="to__do">TO DO</h3>
+        <ul class="incomplete__tasks">
+          <li>
+            <input type="checkbox" /><label>Pay Bills</label
+            ><input type="text" /><button class="delete">Delete</button>
+          </li>
+          <li>
+            <input type="checkbox" /><label>Go shopping</label
+            ><input type="text" /><button class="delete">Delete</button>
+          </li>
+        </ul>
+
+        <h3 class="completed">COMPLETED</h3>
+        <ul class="completed__tasks">
+          <li>
+            <input type="checkbox" checked /><label>See the Doctor</label
+            ><input type="text" /><button class="delete">Delete</button>
+          </li>
+        </ul>
+      </div>
+    </main>
+
+    <script src="./index.js"></script>
+  </body>
+</html>
+
+<!-- Список справ, що можна зберігати окремим заголовком і доповнювати, викреслювати у будь-який момент -->
+<!-- Гра, в яку можна грати паралельно зі складанням списку та ще й тренувати набір букв(буквочки, що падають) -->

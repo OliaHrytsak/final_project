@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+:root {
+  --text-color: #ffffff;
+  --sub-text-colour: #374754;
+  --header-background-color: rgba(117, 190, 218, 0);
+
+  scroll-behavior: smooth;
+  font-family: "Orbitron", sans-serif;
+}
+img {
+  display: block;
+  width: 100%;
+}
+
+.container {
+  /* max-width: 1500px; */
+  margin: 10px 10px 10px 10px;
+}
+
+/* Clock */
+
+body {
+  background-image: url("./img/depositphotos_301374900-stock-photo-top-view-smartphone-blank-screen.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+
+#date {
+  color: #ffffff;
+  font-size: 25px;
+  width: 250px;
+}
+.big__clock {
+  color: #ffffff;
+  font-size: 25px;
+  width: 250px;
+}
+
+.header {
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 10px 10px 20px 10px;
+}
+.header__text {
+  color: #ffffff;
+  font-size: 25px;
+}
+
+.clock__container {
+  display: flex;
+  flex-direction: row;
+}
+
+.main__container {
+  color: var(--text-color);
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1,5;
+}
+
+/* Tasks list */
+li {
+  overflow: hidden;
+  padding: 20px 0;
+  border-bottom: 1px solid #eee;
+}
+li > input[type="checkbox"] {
+  margin: 0 10px;
+  position: relative;
+  top: 15px;
+}
+li > label {
+  font-size: 18px;
+  line-height: 40px;
+  width: 237px;
+  padding: 0 0 0 11px;
+}
+li > input[type="text"] {
+  width: 226px;
+}
+li > .delete:hover {
+  color: #cf2323;
+}
+* Completed */ #completed-tasks label {
+  text-decoration: line-through;
+  color: #888;
+}
+
+/* Edit Task */
+ul li input[type="text"] {
+  display: none;
+}
+
+ul li.editMode input[type="text"] {
+  display: block;
+}
+
+ul li.editMode label {
+  display: none;
+}
