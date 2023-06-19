@@ -78,7 +78,7 @@ li {
 li > input[type="checkbox"] {
   margin: 0 10px;
   position: relative;
-  top: 15px;
+  /* top: 15px; */
 }
 li > label {
   font-size: 18px;
@@ -108,4 +108,9 @@ ul li.editMode input[type="text"] {
 
 ul li.editMode label {
   display: none;
+}
+
+/* клас додається при натисканні на кнопку new__task-btn */
+.message {
+  color: aqua;
 }
