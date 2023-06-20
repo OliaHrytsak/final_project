@@ -23,6 +23,10 @@ img {
   margin: 10px 10px 10px 10px;
 }
 
+button {
+  background-color: aqua;
+}
+
 /* Clock */
 
 body {
@@ -32,12 +36,12 @@ body {
 }
 
 #date {
-  color: #ffffff;
+  color: #9dff00e0;
   font-size: 25px;
   width: 250px;
 }
 .big__clock {
-  color: #ffffff;
+  color: #9dff00e0;
   font-size: 25px;
   width: 250px;
 }
@@ -52,7 +56,8 @@ body {
 }
 .header__text {
   color: #ffffff;
-  font-size: 25px;
+  font-size: 35px;
+  text-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
 }
 
 .clock__container {
@@ -66,19 +71,32 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  line-height: 1,5;
+  line-height: 1, 5;
+}
+
+.to__do {
+  color: #9dff00e0;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-left: 25px;
+}
+
+.add__task label {
+  margin-left: 45px;
+  font-size: 25px;
+  color: #9dff00e0;
+  margin-right: 10px;
 }
 
 /* Tasks list */
 li {
   overflow: hidden;
-  padding: 20px 0;
+  padding: 5px 0;
   border-bottom: 1px solid #eee;
 }
 li > input[type="checkbox"] {
   margin: 0 10px;
   position: relative;
-  /* top: 15px; */
 }
 li > label {
   font-size: 18px;
@@ -86,15 +104,25 @@ li > label {
   width: 237px;
   padding: 0 0 0 11px;
 }
+.incomplete__tasks li input {
+  margin-left: 25px;
+}
 li > input[type="text"] {
   width: 226px;
 }
 li > .delete:hover {
   color: #cf2323;
 }
-* Completed */ #completed-tasks label {
+
+.completed {
+  color: #9dff00e0;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-left: 25px;
+}
+.completed__tasks li label {
   text-decoration: line-through;
-  color: #888;
+  color: var(--text-color);
 }
 
 /* Edit Task */
@@ -113,4 +141,52 @@ ul li.editMode label {
 /* клас додається при натисканні на кнопку new__task-btn */
 .message {
   color: aqua;
+  margin-left: 200px;
+}
+
+/* greeting */
+.greeting {
+  color: #9dff00e0;
+  font-size: 30px;
+  padding-left: 150px;
+}
+
+/* // для менших екранів */
+@media (max-width: 1400px){
+  .header {
+    background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  line-height: 1;
+  }
+  
+  
+}
+
+@media (max-width: 750px){
+  #date {
+    color: #9dff00e0;
+    font-size: 15px;
+    width: 250px;
+  }
+  .big__clock {
+    color: #9dff00e0;
+    font-size: 155px;
+    width: 100px;
+  }
+
+  .header__text {
+    color: #ffffff;
+    font-size: 25px;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+  }
+
+  .add__task {
+    display: flex;
+    flex-direction: column;
+  }
+
+  
 }
