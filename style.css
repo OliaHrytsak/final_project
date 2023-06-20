@@ -32,7 +32,7 @@ button {
 body {
   background-image: url("./img/depositphotos_301374900-stock-photo-top-view-smartphone-blank-screen.jpg");
   background-repeat: no-repeat;
-  background-size: 100% auto;
+  background-size: 100%;
 }
 
 #date {
@@ -173,8 +173,9 @@ ul li.editMode label {
   }
   .big__clock {
     color: #9dff00e0;
-    font-size: 155px;
+    font-size: 15px;
     width: 100px;
+    
   }
 
   .header__text {
@@ -187,6 +188,27 @@ ul li.editMode label {
     display: flex;
     flex-direction: column;
   }
-
+  .add__task select {
+    width: 85px;
+    margin-left: 25px;
+  }
+  .add__task button {
+    width: 55px;
+    margin-left: 25px;
+  }
+  .add__task input {
+    width: 125px;
+    margin-left: 25px;
+  }
+  .greeting {
+    margin-left: -125px;
+    font-size: 20px;
+  }
+  body {
+    background-image: url("./img/depositphotos_301374900-stock-photo-top-view-smartphone-blank-screen.jpg");
+    background-repeat: repeat;
+    
+  }
   
+
 }
