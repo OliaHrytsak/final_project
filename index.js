@@ -115,6 +115,29 @@ addTaskBtn.addEventListener("click", function () {
     newTask.appendChild(inputText);
     newTask.appendChild(deleteButton);
 
+    // Oбробник події для чекбоксу
+    checkbox.addEventListener("change", function () {
+      const listItem = this.parentNode;
+
+      if (this.checked) {
+        listItem.classList.add("completed");
+        completedTasksList.appendChild(listItem);
+        listItem.style.textDecoration = "line-through";
+      } else {
+        listItem.classList.remove("completed");
+      }
+      saveTasks();
+    });
+
+    // Обробник події для кнопки видалення
+    deleteButton.addEventListener("click", function () {
+      const listItem = this.parentNode;
+      const list = listItem.parentNode;
+      list.removeChild(listItem);
+      console.log("Delete Task...");
+      saveTasks();
+    });
+
     incompleteTasksList.appendChild(newTask);
 
     newTaskText.value = ""; // зачистка поля для введення нового завдання
@@ -126,12 +149,14 @@ addTaskBtn.addEventListener("click", function () {
     }, 3000);
   }
 });
+
 // додаємо можливість обрати завдання з запропонованого списку
 selectElement.addEventListener("change", function () {
   const selectedOption =
     selectElement.options[selectElement.selectedIndex].textContent;
   newTaskText.value = selectedOption;
 });
+saveTasks();
 
 //Delete task.
 
@@ -143,7 +168,6 @@ deleteBtns.forEach((deleteBtn) => {
     const list = listItem.parentNode;
     list.removeChild(listItem);
     console.log("Delete Task...");
-    saveTasks();
   });
 });
 
@@ -166,33 +190,28 @@ checkboxes.forEach((checkbox) => {
   });
 });
 
-
-
-
 //Привітання
 const currentTime = new Date();
- const timeString = currentTime.toLocaleTimeString('uk');
- const greeting = document.querySelector(".greeting");
- const newParagraph = document.createElement("p");
+const timeString = currentTime.toLocaleTimeString("uk");
+const greeting = document.querySelector(".greeting");
+const newParagraph = document.createElement("p");
 
- switch (true) {
-case (timeString >= '23:00:00' || timeString < '05:00:00'):
-   
+switch (true) {
+  case timeString >= "23:00:00" || timeString < "05:00:00":
     newParagraph.textContent = "Good night!";
-  greeting .appendChild(newParagraph);
+    greeting.appendChild(newParagraph);
     break;
-  case (timeString >= '05:00:00' && timeString < '11:00:00'):
-    
+  case timeString >= "05:00:00" && timeString < "11:00:00":
     newParagraph.textContent = "Good morning!";
-  greeting .appendChild(newParagraph);
-     break;
-  case (timeString >= '11:00:00' && timeString < '17:00:00'):
-    newParagraph.textContent = "Good afternoon!";
-  greeting .appendChild(newParagraph);
+    greeting.appendChild(newParagraph);
     break;
-  case (timeString > '17:00:00' && timeString < '23:00:00'):
+  case timeString >= "11:00:00" && timeString < "17:00:00":
+    newParagraph.textContent = "Good afternoon!";
+    greeting.appendChild(newParagraph);
+    break;
+  case timeString > "17:00:00" && timeString < "23:00:00":
     newParagraph.textContent = "Good evening!";
-  greeting .appendChild(newParagraph);
+    greeting.appendChild(newParagraph);
 }
 
 console.log(timeString);
