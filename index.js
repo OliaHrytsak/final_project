@@ -1,34 +1,3 @@
-//Clock///
-const currentDate = new Date();
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-
-const monthIndex = currentDate.getMonth();
-const monthName = months[monthIndex];
-const day = currentDate.getDate();
-const dateElement = document.getElementById("date");
-dateElement.textContent = monthName + " " + day;
-
-const clockContainer = document.querySelector(".big__clock");
-
-function updateClock() {
-  clockContainer.innerText = new Date().toLocaleTimeString("uk");
-}
-
-setInterval(updateClock, 1000);
-
 // ADD TASK
 
 const newTaskText = document.querySelector(".new__task");
@@ -45,6 +14,7 @@ const addTask = document.querySelector(".add__task");
 const deleteButton = document.createElement("button");
 deleteButton.textContent = "Delete";
 deleteButton.classList.add("delete");
+console.log(deleteButton)
 
 // Зберегти список завдань у локальне сховище браузера
 function saveTasks() {
@@ -78,7 +48,7 @@ function createTaskElement(taskHTML, incompleteTasksList) {
   tempTaskContainer.classList.add("list__item");
   tempTaskContainer.innerHTML = `<input type="checkbox" checked /><label>${taskHTML}</label><input type="text" /><button class="delete">Delete</button>`;
   const taskElement = tempTaskContainer;
-
+  
   // Додати створений елемент до контейнера завдань
   incompleteTasksList.appendChild(taskElement);
 
@@ -100,13 +70,23 @@ function loadTasks() {
       completedTasksList.appendChild(newTask);
       newTask.style.textDecoration = "line-through";
     });
+    // обробник події для кожної кнопки видалення
+    const deleteButtons = document.querySelectorAll(".delete");
+    deleteButtons.forEach((deleteButton) => {
+      deleteButton.addEventListener("click", function () {
+        const listItem = this.parentNode;
+        const list = listItem.parentNode;
+        list.removeChild(listItem);
+        saveTasks();
+      });
+    });
   }
 }
 
 // Викликати функцію завантаження при завантаженні сторінки
 window.addEventListener("load", function () {
   loadTasks();
-  saveTasks();
+  // saveTasks();
 });
 
 // Додаємо елемент до списку завдань
@@ -133,8 +113,8 @@ addTaskBtn.addEventListener("click", function () {
     newTask.appendChild(taskLabel);
     newTask.appendChild(inputText);
     newTask.appendChild(deleteButton);
-
-
+    
+    
     // Oбробник події для чекбоксу
     checkbox.addEventListener("change", function () {
       const listItem = this.parentNode;
@@ -155,11 +135,11 @@ addTaskBtn.addEventListener("click", function () {
       const list = listItem.parentNode;
       list.removeChild(listItem);
       console.log("Delete Task...");
-      saveTasks();
+      // saveTasks();
     });
-
     incompleteTasksList.appendChild(newTask);
     newTaskText.value = ""; // зачистка поля для введення нового завдання
+    saveTasks();
   } else {
     messageContainer.textContent = "Please enter a task!";
     addTaskBtn.insertAdjacentElement("afterend", messageContainer);
@@ -168,8 +148,7 @@ addTaskBtn.addEventListener("click", function () {
     }, 3000);
   }
 });
-
-
+    
 // додаємо можливість обрати завдання з запропонованого списку
 selectElement.addEventListener("change", function () {
   const selectedOption =
@@ -208,30 +187,11 @@ checkboxes.forEach((checkbox) => {
   });
 });
 
-//Привітання
-const currentTime = new Date();
-const timeString = currentTime.toLocaleTimeString("uk");
-const greeting = document.querySelector(".greeting");
-const newParagraph = document.createElement("p");
+//Видалення усіх виконаних завдань 
 
-switch (true) {
-  case timeString >= "23:00:00" || timeString < "05:00:00":
-    newParagraph.textContent = "Good night!";
-    greeting.appendChild(newParagraph);
-    break;
-  case timeString >= "05:00:00" && timeString < "11:00:00":
-    newParagraph.textContent = "Good morning!";
-    greeting.appendChild(newParagraph);
-    break;
-  case timeString >= "11:00:00" && timeString < "17:00:00":
-    newParagraph.textContent = "Good afternoon!";
-    greeting.appendChild(newParagraph);
-    break;
-  case timeString > "17:00:00" && timeString < "23:00:00":
-    newParagraph.textContent = "Good evening!";
-    greeting.appendChild(newParagraph);
-}
+// const completedTaskDelete = document.querySelector(".delete__all");
+// completedTaskDelete.addEventListener("click", function () {
 
-console.log(timeString);
+// }
 
-
+// localStorage.clear();
