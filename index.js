@@ -66,6 +66,19 @@ function saveTasks() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
+// Оголошення функції createTaskElement
+function createTaskElement(taskHTML, incompleteTasksList) {
+  const tempTaskContainer = document.createElement("li");
+  tempTaskContainer.classList.add("list__item")
+  tempTaskContainer.innerHTML = `<input type="checkbox" checked /><label>${taskHTML}</label><input type="text" /><button class="delete">Delete</button>`;
+  const taskElement = tempTaskContainer;
+
+  // Додати створений елемент до контейнера завдань (лише для показу)
+  incompleteTasksList.appendChild(taskElement);
+
+  return taskElement;
+}
+
 // Завантажити список завдань з локального сховища браузера
 function loadTasks() {
   const tasks = JSON.parse(localStorage.getItem("tasks"));
@@ -76,23 +89,12 @@ function loadTasks() {
     });
 
     tasks.completed.forEach((task) => {
-      const newTask = createTaskElement(task.text, incompleteTasksList);
+      const newTask = createTaskElement(task.text, completedTasksList);
       newTask.classList.add("completed");
       completedTasksList.appendChild(newTask);
       newTask.style.textDecoration = "line-through";
     });
   }
-}
-
-function createTaskElement(taskHTML, incompleteTasksList) {
-  const tempTaskContainer = document.createElement("div");
-  tempTaskContainer.innerHTML = taskHTML;
-  const taskElement = tempTaskContainer.firstChild;
-  
-  // Додати створений елемент до контейнера завдань (лише для показу)
-  incompleteTasksList.appendChild(taskElement);
-
-  return taskElement;
 }
 
 // Викликати функцію завантаження при завантаженні сторінки
@@ -137,7 +139,7 @@ addTaskBtn.addEventListener("click", function () {
       } else {
         listItem.classList.remove("completed");
       }
-      saveTasks()
+      saveTasks();
     });
 
     // Обробник події для кнопки видалення
@@ -152,6 +154,7 @@ addTaskBtn.addEventListener("click", function () {
     incompleteTasksList.appendChild(newTask);
 
     newTaskText.value = ""; // зачистка поля для введення нового завдання
+    saveTasks();
   } else {
     messageContainer.textContent = "Please enter a task!";
     addTaskBtn.insertAdjacentElement("afterend", messageContainer);
@@ -159,7 +162,6 @@ addTaskBtn.addEventListener("click", function () {
       messageContainer.remove();
     }, 3000);
   }
-  saveTasks();
 });
 
 // додаємо можливість обрати завдання з запропонованого списку
@@ -169,9 +171,7 @@ selectElement.addEventListener("change", function () {
   newTaskText.value = selectedOption;
 });
 
-
 //Delete task.
-
 const deleteBtns = document.querySelectorAll(".delete");
 
 deleteBtns.forEach((deleteBtn) => {
@@ -182,12 +182,9 @@ deleteBtns.forEach((deleteBtn) => {
     console.log("Delete Task...");
     saveTasks();
   });
-  
 });
 
-
 //REMOVE tasks to completed
-
 const checkboxes = document.querySelectorAll("input[type='checkbox']");
 
 checkboxes.forEach((checkbox) => {
@@ -201,10 +198,10 @@ checkboxes.forEach((checkbox) => {
     } else {
       listItem.classList.remove("completed");
     }
-     saveTasks();
+    saveTasks();
   });
- 
 });
+
 
 //Привітання
 const currentTime = new Date();
