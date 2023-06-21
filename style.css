@@ -19,12 +19,13 @@ img {
 }
 
 .container {
-  max-width: 1500px;
+  max-width: 100%;
   margin: 10px 10px 10px 10px;
 }
 
 button {
   background-color: aqua;
+  cursor: pointer;
 }
 
 /* Clock */
@@ -123,7 +124,9 @@ li > .delete:hover {
 .completed__tasks li label {
   text-decoration: line-through;
   color: var(--text-color);
+  
 }
+
 
 /* Edit Task */
 ul li input[type="text"] {
@@ -149,6 +152,17 @@ ul li.editMode label {
   color: #9dff00e0;
   font-size: 30px;
   padding-left: 150px;
+}
+
+.delete__all {
+  background-color:  rgba(0, 0, 0, 0.6);
+  height: 35px;
+}
+.delete__all-btn {
+  color: var(--sub-text-colour);
+ height: 30px;
+  font-weight: bold;
+  border-radius: 50px;
 }
 
 /* // для менших екранів */

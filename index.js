@@ -44,20 +44,24 @@ const addTask = document.querySelector(".add__task");
 
 // Зберегти список завдань у локальне сховище браузера
 function saveTasks() {
-  const incompleteTasks = document.querySelectorAll(".incomplete__tasks li");
-  const completedTasks = document.querySelectorAll(".completed__tasks li");
+  const incompleteTasks = Array.from(incompleteTasksList.children).map((task) => {
+    return {
+      text: task.querySelector("label").textContent,
+      completed: false
+    };
+  });
+
+  const completedTasks = Array.from(completedTasksList.children).map((task) => {
+    return {
+      text: task.querySelector("label").textContent,
+      completed: true
+    };
+  });
 
   const tasks = {
-    incomplete: [],
-    completed: [],
+    incomplete: incompleteTasks,
+    completed: completedTasks
   };
-
-  incompleteTasks.forEach((task) => {
-    tasks.incomplete.push(task.innerHTML);
-  });
-  completedTasks.forEach((task) => {
-    tasks.completed.push(task.innerHTML);
-  });
 
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
@@ -67,12 +71,12 @@ function loadTasks() {
   const tasks = JSON.parse(localStorage.getItem("tasks"));
   if (tasks) {
     tasks.incomplete.forEach((task) => {
-      const newTask = createTaskElement(task);
+      const newTask = createTaskElement(task.text, incompleteTasksList);
       incompleteTasksList.appendChild(newTask);
     });
 
     tasks.completed.forEach((task) => {
-      const newTask = createTaskElement(task);
+      const newTask = createTaskElement(task.text, incompleteTasksList);
       newTask.classList.add("completed");
       completedTasksList.appendChild(newTask);
       newTask.style.textDecoration = "line-through";
@@ -80,15 +84,22 @@ function loadTasks() {
   }
 }
 
-// Створити елемент завдання на основі HTML-рядка
-function createTaskElement(taskHTML) {
+function createTaskElement(taskHTML, incompleteTasksList) {
   const tempTaskContainer = document.createElement("div");
   tempTaskContainer.innerHTML = taskHTML;
-  return tempTaskContainer.firstChild;
+  const taskElement = tempTaskContainer.firstChild;
+  
+  // Додати створений елемент до контейнера завдань (лише для показу)
+  incompleteTasksList.appendChild(taskElement);
+
+  return taskElement;
 }
 
 // Викликати функцію завантаження при завантаженні сторінки
-window.addEventListener("load", loadTasks);
+window.addEventListener("load", function () {
+  loadTasks();
+  saveTasks();
+});
 
 // Додаємо елемент до списку завдань
 addTaskBtn.addEventListener("click", function () {
@@ -126,7 +137,7 @@ addTaskBtn.addEventListener("click", function () {
       } else {
         listItem.classList.remove("completed");
       }
-      saveTasks();
+      saveTasks()
     });
 
     // Обробник події для кнопки видалення
@@ -148,6 +159,7 @@ addTaskBtn.addEventListener("click", function () {
       messageContainer.remove();
     }, 3000);
   }
+  saveTasks();
 });
 
 // додаємо можливість обрати завдання з запропонованого списку
@@ -156,7 +168,7 @@ selectElement.addEventListener("change", function () {
     selectElement.options[selectElement.selectedIndex].textContent;
   newTaskText.value = selectedOption;
 });
-saveTasks();
+
 
 //Delete task.
 
@@ -168,8 +180,11 @@ deleteBtns.forEach((deleteBtn) => {
     const list = listItem.parentNode;
     list.removeChild(listItem);
     console.log("Delete Task...");
+    saveTasks();
   });
+  
 });
+
 
 //REMOVE tasks to completed
 
@@ -186,8 +201,9 @@ checkboxes.forEach((checkbox) => {
     } else {
       listItem.classList.remove("completed");
     }
-    saveTasks();
+     saveTasks();
   });
+ 
 });
 
 //Привітання
@@ -215,3 +231,7 @@ switch (true) {
 }
 
 console.log(timeString);
+
+
+
+
