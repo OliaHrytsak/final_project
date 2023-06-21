@@ -187,11 +187,22 @@ checkboxes.forEach((checkbox) => {
   });
 });
 
-//Видалення усіх виконаних завдань 
 
-// const completedTaskDelete = document.querySelector(".delete__all");
-// completedTaskDelete.addEventListener("click", function () {
+/// Функція для видалення виконаних завдань з локального сховища
+function deleteCompletedTasksFromLocalStorage() {
+  const tasks = JSON.parse(localStorage.getItem("tasks"));
 
-// }
+  if (tasks) {
+    tasks.completed = []; // Очистити масив виконаних завдань
+    localStorage.setItem("tasks", JSON.stringify(tasks)); // Зберегти зміни у локальне сховище
+  }
+}
+
+// Обробник події для кнопки видалення всіх виконаних завдань
+const completedTaskDelete = document.querySelector(".delete__all");
+completedTaskDelete.addEventListener("click", function () {
+  deleteCompletedTasksFromLocalStorage();
+  completedTasksList.innerHTML = ""; // Очистити список виконаних завдань на сторінці
+});
 
 // localStorage.clear();
