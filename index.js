@@ -1,5 +1,4 @@
 //Clock///
-
 const currentDate = new Date();
 const months = [
   "January",
@@ -42,25 +41,32 @@ const messageContainer = document.createElement("div");
 messageContainer.classList.add("message");
 const addTask = document.querySelector(".add__task");
 
+// Оголошення змінної deleteButton
+const deleteButton = document.createElement("button");
+deleteButton.textContent = "Delete";
+deleteButton.classList.add("delete");
+
 // Зберегти список завдань у локальне сховище браузера
 function saveTasks() {
-  const incompleteTasks = Array.from(incompleteTasksList.children).map((task) => {
-    return {
-      text: task.querySelector("label").textContent,
-      completed: false
-    };
-  });
+  const incompleteTasks = Array.from(incompleteTasksList.children).map(
+    (task) => {
+      return {
+        text: task.querySelector("label").textContent,
+        completed: false,
+      };
+    }
+  );
 
   const completedTasks = Array.from(completedTasksList.children).map((task) => {
     return {
       text: task.querySelector("label").textContent,
-      completed: true
+      completed: true,
     };
   });
 
   const tasks = {
     incomplete: incompleteTasks,
-    completed: completedTasks
+    completed: completedTasks,
   };
 
   localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -69,11 +75,11 @@ function saveTasks() {
 // Оголошення функції createTaskElement
 function createTaskElement(taskHTML, incompleteTasksList) {
   const tempTaskContainer = document.createElement("li");
-  tempTaskContainer.classList.add("list__item")
+  tempTaskContainer.classList.add("list__item");
   tempTaskContainer.innerHTML = `<input type="checkbox" checked /><label>${taskHTML}</label><input type="text" /><button class="delete">Delete</button>`;
   const taskElement = tempTaskContainer;
 
-  // Додати створений елемент до контейнера завдань (лише для показу)
+  // Додати створений елемент до контейнера завдань
   incompleteTasksList.appendChild(taskElement);
 
   return taskElement;
@@ -128,6 +134,7 @@ addTaskBtn.addEventListener("click", function () {
     newTask.appendChild(inputText);
     newTask.appendChild(deleteButton);
 
+
     // Oбробник події для чекбоксу
     checkbox.addEventListener("change", function () {
       const listItem = this.parentNode;
@@ -142,7 +149,7 @@ addTaskBtn.addEventListener("click", function () {
       saveTasks();
     });
 
-    // Обробник події для кнопки видалення
+     // Обробник події для кнопки видалення
     deleteButton.addEventListener("click", function () {
       const listItem = this.parentNode;
       const list = listItem.parentNode;
@@ -152,9 +159,7 @@ addTaskBtn.addEventListener("click", function () {
     });
 
     incompleteTasksList.appendChild(newTask);
-
     newTaskText.value = ""; // зачистка поля для введення нового завдання
-    saveTasks();
   } else {
     messageContainer.textContent = "Please enter a task!";
     addTaskBtn.insertAdjacentElement("afterend", messageContainer);
@@ -163,6 +168,7 @@ addTaskBtn.addEventListener("click", function () {
     }, 3000);
   }
 });
+
 
 // додаємо можливість обрати завдання з запропонованого списку
 selectElement.addEventListener("change", function () {
@@ -202,7 +208,6 @@ checkboxes.forEach((checkbox) => {
   });
 });
 
-
 //Привітання
 const currentTime = new Date();
 const timeString = currentTime.toLocaleTimeString("uk");
@@ -228,7 +233,5 @@ switch (true) {
 }
 
 console.log(timeString);
-
-
 
 
