@@ -18,8 +18,8 @@ function createDeleteButton() {
 }
 // createDeleteButton();
 
-//Oбробник події видалення для кнопки deleteButton
-function attachDeleteButtonEvent() {
+//обробник подій для кнопок Delete i чекбоксів! 
+function attachEventHandlers() {
   const deleteButtons = document.querySelectorAll(".delete");
   deleteButtons.forEach((deleteButton) => {
     deleteButton.addEventListener("click", function () {
@@ -29,10 +29,26 @@ function attachDeleteButtonEvent() {
       saveTasks();
     });
   });
+
+  const checkboxes = document.querySelectorAll(".checkbox");
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", function () {
+      const listItem = this.parentNode;
+
+      if (this.checked) {
+        listItem.classList.add("completed");
+        completedTasksList.appendChild(listItem);
+        listItem.style.textDecoration = "line-through";
+      } else {
+        listItem.classList.remove("completed");
+        listItem.style.textDecoration = "none";
+      }
+      saveTasks();
+    });
+  });
 }
-// attachDeleteButtonEvent();
 
-
+// attachEventHandlers();
 
 // Додаємо елемент до списку завдань
 addTaskBtn.addEventListener("click", function () {
@@ -43,7 +59,8 @@ addTaskBtn.addEventListener("click", function () {
 
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
-
+    checkbox.classList.add("checkbox");
+    
     const taskLabel = document.createElement("label");
     taskLabel.textContent = newTaskText.value;
 
@@ -59,35 +76,16 @@ addTaskBtn.addEventListener("click", function () {
     newTask.appendChild(inputText);
     newTask.appendChild(deleteButton);
 
-    // Oбробник події для чекбоксу
    
-      
-    checkbox.addEventListener("change", function () {
-      const listItem = this.parentNode;
 
-      if (this.checked) {
-        listItem.classList.add("completed");
-        completedTasksList.appendChild(listItem);
-        listItem.style.textDecoration = "line-through";
-      } else {
-        listItem.classList.remove("completed");
-        listItem.style.textDecoration = "none";
-      }
-      saveTasks();
-    });
-  
-
-    // Обробник події для кнопки видалення
-    deleteButton.addEventListener("click", function () {
-      const listItem = this.parentNode;
-      const list = listItem.parentNode;
-      list.removeChild(listItem);
-      console.log("Delete Task...");
-      // saveTasks();
-    });
+//додаємо завдання до списку incomplete
     incompleteTasksList.appendChild(newTask);
     newTaskText.value = ""; // зачистка поля для введення нового завдання
     saveTasks();
+
+     // Додаємо Oбробник події для чекбоксу і кнопки видалення
+        attachEventHandlers();
+
   } else {
     messageContainer.textContent = "Please enter a task!";
     addTaskBtn.insertAdjacentElement("afterend", messageContainer);
@@ -95,7 +93,9 @@ addTaskBtn.addEventListener("click", function () {
       messageContainer.remove();
     }, 3000);
   }
+  
 });
+
 
 // додаємо можливість обрати завдання з запропонованого списку
 selectElement.addEventListener("change", function () {
@@ -104,26 +104,6 @@ selectElement.addEventListener("change", function () {
   newTaskText.value = selectedOption;
 });
 
-//Delete task.
-attachDeleteButtonEvent();
-
-//REMOVE tasks to completed
-const checkboxes = document.querySelectorAll("input[type='checkbox']");
-
-checkboxes.forEach((checkbox) => {
-  checkbox.addEventListener("change", function () {
-    const listItem = this.parentNode;
-
-    if (this.checked) {
-      listItem.classList.add("completed");
-      completedTasksList.appendChild(listItem);
-      listItem.style.textDecoration = "line-through";
-    } else {
-      listItem.classList.remove("completed");
-    }
-    saveTasks();
-  });
-});
 
 /// Функція для видалення виконаних завдань з локального сховища
 function deleteCompletedTasksFromLocalStorage() {
