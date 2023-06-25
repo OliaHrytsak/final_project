@@ -1,5 +1,4 @@
-// ADD TASK
-
+// Змінні
 const newTaskText = document.querySelector(".new__task");
 const selectElement = document.querySelector(".task__options");
 const addTaskBtn = document.querySelector(".new__task-btn");
@@ -18,7 +17,7 @@ function createDeleteButton() {
 }
 // createDeleteButton();
 
-//обробник подій для кнопок Delete i чекбоксів! 
+//обробник подій для кнопок Delete i чекбоксів!
 function attachEventHandlers() {
   const deleteButtons = document.querySelectorAll(".delete");
   deleteButtons.forEach((deleteButton) => {
@@ -48,8 +47,8 @@ function attachEventHandlers() {
   });
 }
 
-// attachEventHandlers();
 
+// ADD TASK
 // Додаємо елемент до списку завдань
 addTaskBtn.addEventListener("click", function () {
   // Перевірка, чи введено значення у поле для нового завдання
@@ -60,7 +59,7 @@ addTaskBtn.addEventListener("click", function () {
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.classList.add("checkbox");
-    
+
     const taskLabel = document.createElement("label");
     taskLabel.textContent = newTaskText.value;
 
@@ -76,26 +75,21 @@ addTaskBtn.addEventListener("click", function () {
     newTask.appendChild(inputText);
     newTask.appendChild(deleteButton);
 
-   
-
-//додаємо завдання до списку incomplete
+    //додаємо завдання до списку incomplete
     incompleteTasksList.appendChild(newTask);
     newTaskText.value = ""; // зачистка поля для введення нового завдання
     saveTasks();
 
-     // Додаємо Oбробник події для чекбоксу і кнопки видалення
-        attachEventHandlers();
-
+    // Додаємо функцію Oбробника подій для чекбоксу і кнопки видалення
+    attachEventHandlers();
   } else {
-    messageContainer.textContent = "Please enter a task!";
+    messageContainer.textContent = "Please enter a task!"; //Повідомляємо, що завдання не введено
     addTaskBtn.insertAdjacentElement("afterend", messageContainer);
     setTimeout(function () {
       messageContainer.remove();
     }, 3000);
   }
-  
 });
-
 
 // додаємо можливість обрати завдання з запропонованого списку
 selectElement.addEventListener("change", function () {
@@ -103,7 +97,6 @@ selectElement.addEventListener("change", function () {
     selectElement.options[selectElement.selectedIndex].textContent;
   newTaskText.value = selectedOption;
 });
-
 
 /// Функція для видалення виконаних завдань з локального сховища
 function deleteCompletedTasksFromLocalStorage() {

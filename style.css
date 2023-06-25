@@ -28,6 +28,10 @@ button {
   cursor: pointer;
 }
 
+input{
+  height: 25px;
+}
+
 /* Clock */
 
 body {
@@ -147,6 +151,16 @@ ul li.editMode label {
   margin-left: 200px;
 }
 
+.new__task-btn {
+  height: 25px;
+  width: 45px;
+  font-size: 15px;
+}
+
+.delete {
+  margin-left: 10px;
+  width: 45px;
+}
 /* greeting */
 .greeting {
   color: #9dff00e0;
@@ -161,9 +175,11 @@ ul li.editMode label {
 .delete__all-btn {
   color: var(--sub-text-colour);
  height: 30px;
+ width: 175px;
   font-weight: bold;
   border-radius: 50px;
 }
+
 
 /* // для менших екранів */
 @media (max-width: 1400px){

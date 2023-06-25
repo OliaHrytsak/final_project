@@ -73,5 +73,4 @@ function saveTasks() {
   // Викликати функцію завантаження при завантаженні сторінки
 window.addEventListener("load", function () {
     loadTasks();
-    // saveTasks();
   });
