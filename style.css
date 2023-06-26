@@ -93,6 +93,13 @@ body {
   margin-right: 10px;
 }
 
+.new__task{
+  font-size: 16px;
+}
+.task__options{
+  font-size: 16px;
+}
+
 /* Tasks list */
 li {
   overflow: hidden;
@@ -211,9 +218,10 @@ ul li.editMode label {
   .add__task {
     display: flex;
     flex-direction: column;
+    font-size: 20px;
   }
   .add__task select {
-    width: 85px;
+    width: 125px;
     margin-left: 25px;
   }
   .add__task button {
@@ -221,7 +229,7 @@ ul li.editMode label {
     margin-left: 25px;
   }
   .add__task input {
-    width: 125px;
+    width: 250px;
     margin-left: 25px;
   }
   .greeting {
@@ -231,6 +239,18 @@ ul li.editMode label {
   body {
     background-image: url("./img/depositphotos_301374900-stock-photo-top-view-smartphone-blank-screen.jpg");
     background-repeat: repeat;
+  }
+  li > label {
+    font-size: 14px;
+    line-height: 25px;
+  }
+  .new__task{
+    font-size: 14px;
+    
+  }
+  .task__options{
+    font-size: 14px;
+    
   }
 }
 
